@@ -1,0 +1,7 @@
+<resources>
+    <!-- 引用方式：
+            在代码中通过 R.string.app_name 可以获得该字符串的引用
+            在 XML 中通过 @string/app_name 可以获得该字符串的引用
+     -->
+    <string name="app_name">HelloWorld</string>
+</resources>

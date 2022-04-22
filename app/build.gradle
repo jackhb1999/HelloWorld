@@ -1,0 +1,75 @@
+plugins {
+    /**
+     *  插件
+     *      com.android.application 表示这是一个应用模块，应用模块可以直接运行
+     *      com.android.library 表示这是一个库模块，库模块只能作为代码库依附于别的应用模块来运行
+     */
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+// android 闭包
+android {
+    compileSdk 31
+
+    // defaultConfig 闭包中对项目的更多细节进行配置
+    defaultConfig {
+        // applicationId 是每一个应用的唯一标识，绝对不能重复，默认会使用创建时指定的包名
+        applicationId "com.example.helloworld"
+        // 项目最低兼容的 Android 版本
+        minSdk 23
+        // 充分测试版本
+        targetSdk 31
+        // versionCode 用于指定项目的版本号
+        versionCode 1
+        // versionName 用于指定项目的版本名
+        versionName "1.0"
+
+        // testInstrumentationRunner 用于在当前项目中启用 JUnit 测试
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    /**
+     *  buildTypes 闭包，用于指定生成安装文件的相关配置
+     *  通常有两个子闭包：
+     *      debug 闭包，用于指定生成测试版安装文件的配置
+     *      release 闭包，用于生成正式版安装文件的配置
+     */
+    buildTypes {
+        release {
+            // minifyEnabled 用于指定是否对项目的代码进行混淆，true 表示混淆，false 表示不混淆
+            minifyEnabled false
+            /**
+             * proguardFiles 用于指定混淆时使用的规则文件
+             *  proguard-android-optimize.txt 是在 \Android\Sdk\tools\proguard 目录下的，里面是所有项目通用的混淆规则
+             *  proguard-rules.pro 是在当前项目的根目录下的，里面可以编写当前项目特有的混淆规则
+             *
+             * Android Studio 直接运行项目生成的都是测试版安装文件
+             */
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+/**
+ *  dependencies 闭包，指定当前项目所有的依赖关系
+ *  3种依赖方式：
+ *      本地依赖，可以对本地的 jar 包或目录添加依赖关系
+ *      库依赖，可以对项目中的库模块添加依赖关系
+ *      远程依赖，可以对 jcenter 仓库上的开源项目添加依赖关系
+ */
+dependencies {
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
